@@ -43,5 +43,15 @@ export class User {
                 this.set(response.data);
             });
     }
+
+    save(): void {
+        const rootUrl = 'http://localhost:3000';
+        const id = this.get('id');
+        if (id) {
+            axios.put(`${rootUrl}/users/${id}`, this.data);
+        } else {
+            axios.post(`${rootUrl}/users`, this.data);
+        }
+    }
 }
 
