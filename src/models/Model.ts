@@ -27,6 +27,8 @@ export class Model<T extends HasId> {
         private events: Events,
     ) {}
 
+    // short syntacs will not work in case if assignment of events happens outside of constructor,
+    // use getter instead in such case
     on = this.events.on;
 
     trigger = this.events.trigger;
