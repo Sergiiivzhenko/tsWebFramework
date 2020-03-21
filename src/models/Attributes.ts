@@ -5,10 +5,14 @@ export class Attributes<T> {
     return this.data[propName];
   };
 
-  set(update: T): void {
+  set = (update: T): void => {
     this.data = {
       ...this.data,
       ...update,
     };
-  }
+  };
+
+  getAll = (): T => {
+    return this.data;
+  };
 }
