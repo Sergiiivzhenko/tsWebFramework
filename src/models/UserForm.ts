@@ -3,22 +3,17 @@ import {User} from "./User";
 export class UserForm {
     constructor(public parent: Element, public model: User) {}
 
-    eventsMap(): {[key: string]: () => void} {
+    eventsMap = (): {[key: string]: () => void} => {
         return {
-            'click:button': this.onButtonClick,
-            'mouseenter:h1': this.onMouseEnter,
+            'click:.set-age': this.onSetAgeClick,
         };
-    }
+    };
 
-    onButtonClick(): void {
-        console.log('Hi there');
-    }
+    onSetAgeClick = () => {
+        console.log('on set click');
+    };
 
-    onMouseEnter(): void {
-        console.log('on mouse over');
-    }
-
-    template(): string {
+    template = (): string => {
         return `
             <div>
                 <h1>User Form</h1>
@@ -26,11 +21,12 @@ export class UserForm {
                 <div>User age: ${this.model.get('age')}</div>
                 <input />
                 <button>Click Me</button>
+                <button class="set-age">Set random age</button>
             <div>
         `;
-    }
+    };
 
-    bindEvents(fragment: DocumentFragment): void {
+    bindEvents = (fragment: DocumentFragment): void => {
         const eventsMap = this.eventsMap();
         for (let eventKey in eventsMap) {
             const [eventName, selector] = eventKey.split(':');
@@ -38,12 +34,12 @@ export class UserForm {
                 element.addEventListener(eventName, eventsMap[eventKey]);
             });
         }
-    }
+    };
 
-    render(): void {
+    render = (): void => {
         const templateElement = document.createElement('template');
         templateElement.innerHTML = this.template();
         this.bindEvents(templateElement.content);
         this.parent.append(templateElement.content);
-    }
+    };
 }
