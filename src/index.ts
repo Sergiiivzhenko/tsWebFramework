@@ -1,4 +1,4 @@
-import {UserForm} from "./models/UserForm";
+import {UserForm} from "./views/UserForm";
 import {User} from "./models/User";
 
 const user = User.buildUser({name: 'NAME', age: 20});
